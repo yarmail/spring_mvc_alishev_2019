@@ -1,0 +1,64 @@
+Урок 16: Spring MVC. Конфигурация с помощью Java кода.
+
+Чем заменить web.xml
+
+Вариант 1 (более сложный)
+Для этого необходимо в проекте создать Java класс
+который реализует интерфейс
+org.springframework.web.WebApplicationInitializer
+мы будем иметь больше контроля над ситуацией,
+но нам придется писать больше кода
+
+
+как-то так:
+.
+import org.springframework.web.WebApplicationInitializer;
+public class MyWebAppInitializer implements WebApplicationInitializer {
+    @Override
+    public void onStartup(javax.servlet.ServletContext servletContext) throws ServletException {
+        // код который до этого помещался в web.xml
+    }
+}
+.
+
+Такой класс работает как web.xml
+
+---
+
+Другой вариант проще, использовать для конфигурации
+наследника абстрактного класса
+AbstractAnnotationConfigDispatcherServletInitializer
+который реализует WebApplicationInitializer
+Останутся методы, которые надо реализовать,
+но большинство функционала будет сделано за нас
+
+Пример.
+Создаем класс MySpringMvcDispatcherServletInitializer
+
+---
+
+Создаем в папке Config конфигурационный файл
+@Configuration
+public class SpringConfig{}
+(Пустой конфигурационный класс равен по функционалу
+applicationContextMVC.xml)
+
+---
+
+@ComponentScan ("lesson16")
+тоже самое, что и
+<context:component-scan base-package="lesson12"/>
+Замена в web.xml поиска компонентов для бинов
+
+---
+
+@EnableWebMvc
+У нас не только спринг приложение, но и поддержка web
+Эта аннотация аналогична
+<mvc:annotation-driven/>
+в файле applicationContextMVC.xml
+
+---
+Осталось реализовать бины подключения к
+thymeleaf
+

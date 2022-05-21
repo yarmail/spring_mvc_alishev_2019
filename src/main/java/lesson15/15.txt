@@ -1,0 +1,82 @@
+Урок 15: Spring MVC. Первое приложение.
+
+План урока
+- создать пустое Spring приложение
+- Подключим Tomcat
+- добавим необходимые зависимости  в pom
+- реализуем web.xml (потом на Java)
+- реализуем applicationContext.xml (потом на Java)
+- реализуем контроллер и представление(пока без
+модели)
+
+---
+
+Создаем пустое Spring приложение
+File - New - Project
+maven-archetype-webapp
+
+---
+
+Подключаем Tomcat
+Скачиваем и устанавливаем.
+Подключаем Tomcat - Run - Edit Configuration
+
+На этом этапе Алишев рекомендует полностью
+перезапустить Idea
+
+---
+
+Добавим необходимые зависимости  в pom
+Основноые базовые зависимости Spring
+- Spring Core
+- Spring Context
+
+Зависимости Spring MVC
+- Spring Web
+- Spring WebMVC
+
+Также нам потребуется Thymeleaf Spring5.
+
+---
+
+Реализуем web.xml (папка WEB-INF)
+
+Переключаем приложение на DispatcherServlet
+и подключаем applicationContextMVC.xml
+Возможно придется оба файла потом скопировать
+в папку урока, если они будут мешать другим урокам
+
+(!!)
+web.xml + applicationContextMVC.xml
+работет плохо попробуем в 16 уроке 
+сделать через Java конфиг,
+а в этом уроке я оставляю копии всех
+когфигов
+
+---
+
+Реализуем контроллер и представление
+
+Создаем Java класс HelloController
+и помечаем аннотацией @Controller
+.
+@Controller
+public class HelloController {
+}
+.
+
+Аннотация @GetMapping.
+Когда запрос приходит на нужный адрес,
+выполнить метод и вернуть представление (view)
+.
+    @GetMapping("hello-world")
+    public String sayHello() {
+        return "hello_word";
+    }
+.
+
+---
+
+Теперь реализуем это представление
+(должно лежать в папке (WEB-INF/views))
+hello-world.html
