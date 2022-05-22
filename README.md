@@ -28,3 +28,9 @@
 <a href="/src/main/java/lesson18">
 Урок 18: Протокол HTTP. Методы GET и POST.</a>
 (теория)<br>
+
+<!--- Урок 19 -->
+<a href="/src/main/java/lesson19">
+Урок 19: Параметры GET запроса. Аннотация @RequestParam.</a><br>
+(в т.ч. пример работы с PVS)<br>
+<img src="/src/main/java/lesson19/get-request.png" width="200"><br>

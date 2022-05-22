@@ -1,0 +1,49 @@
+Урок 19: Параметры GET запроса. Аннотация @RequestParam.
+
+Пример рабоы с PVS-Studio, статичским анализатором
+кода в виде плагина для Idea
+
+Запросы к серверу - GET, POST
+
+---
+
+Запросы GET
+Конфиг в 16 уроке
+
+Параметры GET - запроса можно получить
+2 способами
+C помощью объекта HttpServletRequest
+.
+    @GetMapping("/hello")
+    public String helloPage(HttpServletRequest request) {
+    String name = request.getParameter("name")
+    // работаем с пришедим параметром
+    return "first/hello";
+    }
+.
+С помощью этого способа вы получаете доступ к объекту,
+который содержит все параметры запроса. Он большой
+
+С помощью аннотации @RequestMapping
+.
+    @GetMapping("/hello")
+    public String helloPage(@RequestParam("name") String name) {
+     // работаем с пришедим параметром
+    return "first/hello";
+    }
+.
+С помощью этого способы вы получаете доступ
+только к тем параметрам, которые нужны
+
+Практика
+Используем работу с параметрами в 17 уроке работы
+с контроллерами
+
+---
+
+также мы можем указать параметры к запросу
+в ссылке на странице
+(представлении)
+<a href="/first/hello?name=Tom&surname=Jones">
+
+

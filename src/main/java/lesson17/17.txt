@@ -69,7 +69,7 @@ public String newPerson (Model model) {}
 @Controller
 @RequestMapping("/people")
 public class PersonController {}
-Типа все URL адреса, имеющие в начале /people будут попадать сюда
+Типа все URL адреса, имеющие вначале /people будут попадать сюда
 
 ---
 
@@ -79,6 +79,11 @@ public class PersonController {}
 @ComponentScan ({"lesson16", "lesson17"})
 
 Дописываем контроллеры и представления к ним
+
+Как вариант
+После урока можно отключить в конфиге (lesson17)
+и подключить другую папку
+
 
 
 
