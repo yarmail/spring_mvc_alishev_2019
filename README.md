@@ -12,14 +12,19 @@
 
 <!--- Урок 15 -->
 <a href="/src/main/java/lesson15">
-Урок 15: Spring MVC. Первое приложение.</a><br>
-(конфиг на xml)
+Урок 15: Spring MVC. Первое приложение.</a>
+(конфиг на xml)<br>
 
 <!--- Урок 16 -->
 <a href="/src/main/java/lesson16">
-Урок 16: Spring MVC. Конфигурация с помощью Java кода.</a><br>
-(конфиг на Java)
+Урок 16: Spring MVC. Конфигурация с помощью Java кода.</a>
+(конфиг на Java)<br>
 
 <!--- Урок 17 -->
-<a href="/src/main/java/lesson16">
+<a href="/src/main/java/lesson17">
 Урок 17: Контроллеры. Аннотация @Controller.</a><br>
+
+<!--- Урок 18 -->
+<a href="/src/main/java/lesson18">
+Урок 18: Протокол HTTP. Методы GET и POST.</a>
+(теория)<br>
