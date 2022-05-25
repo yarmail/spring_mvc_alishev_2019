@@ -9,5 +9,25 @@
 <a href="/goodbye">go to goodbye</a>
 or
 <a href="/exit">go to exit</a>
+
+<p th:text="${message}"/>
 </body>
 </html>
+
+<!--
+Урок 20
+В контроллере засунули в Model данные в виде
+ключ-значение
+Здесь будем вытаскивать из модели эти данные
+
+С помощью Thymeleaf th:text
+мы вставляем значение ключа
+message модели Model в html
+<p th:text="${message}"/>
+
+Для проверки - делаем запрос
+http://localhost:8080/first/hello?name=Ivan&surname=Petrov
+и через контроллер данные уходят в модель,
+а потом в представление
+
+-->

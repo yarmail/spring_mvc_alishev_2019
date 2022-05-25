@@ -8,7 +8,7 @@
 <!--- Урок 14 -->
 <a href="/src/main/java/lesson14">
 Урок 14: Spring MVC. Теория.</a><br>
-<img src="/src/main/java/lesson14/DispatcherServlet.png" width="200"><br>
+<img src="/src/main/java/lesson14/DispatcherServlet.png" width="200">
 
 <!--- Урок 15 -->
 <a href="/src/main/java/lesson15">
@@ -34,3 +34,8 @@
 Урок 19: Параметры GET запроса. Аннотация @RequestParam.</a><br>
 (в т.ч. пример работы с PVS)<br>
 <img src="/src/main/java/lesson19/get-request.png" width="200"><br>
+
+<!--- Урок 20 -->
+<a href="/src/main/java/lesson20">
+Урок 20: Модель. Передача данных от контроллера к представлению.</a><br>
+<img src="/src/main/java/lesson20/model.png" width="200"><br>

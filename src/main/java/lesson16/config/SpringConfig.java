@@ -13,7 +13,8 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 @Configuration
-@ComponentScan ({"lesson16", "lesson17"})
+@ComponentScan ({"lesson16", "lesson20"})
+// было 17, стало 20
 @EnableWebMvc
 public class SpringConfig implements WebMvcConfigurer {
 
@@ -64,4 +65,7 @@ templateResolver() Thymeleaf
 
 эта конфигурация полностью идентична
 applicationContextMVC.xml
+
+Переделываем конфиг с 17 на 20 урок
+Будем писать контроллер другим способом
  */

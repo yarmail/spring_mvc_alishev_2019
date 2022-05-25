@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 
-@Controller
+//@Controller
 @RequestMapping("/first")
 public class FirstController {
     @GetMapping("/hello")
@@ -64,6 +64,13 @@ public String helloPage(@RequestParam("name") String name,
 Если мы пишем
 @RequestParam("name", required = false) String name
 то не будет ошибки и будет лежать null
+
+---
+
+Удаляем метку @Controller
+и делаем в уроке 20 другим способом
+Также переделываем в 16 уроке конфиг
+на 20 урок
 
 
  */
