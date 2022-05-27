@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Человек</title>
+</head>
+<body>
+<p>я страница show из папки people controller people</p>
+<p th:text="${person.getName()}">value</p>
+<p th:text="${person.getId()}">value</p>
+
+</body>
+</html>
+
+<!--
+В контроллере PeopleController
+мы берем метод show
+в Model мы сделали ключ person
+который содержит пользователя с нужным id
+Выводим его параметры
+
+
+-->

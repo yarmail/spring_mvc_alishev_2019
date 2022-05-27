@@ -39,3 +39,9 @@
 <a href="/src/main/java/lesson20">
 Урок 20: Модель. Передача данных от контроллера к представлению.</a><br>
 <img src="/src/main/java/lesson20/model.png" width="200"><br>
+
+<!--- Урок 21 -->
+<a href="/src/main/java/lesson21">
+Урок 21: CRUD, REST, Паттерн DAO (Data Access Object)</a><br>
+(полезно) <br>
+<img src="/src/main/java/lesson21/crud_post.png" width="200"><br>

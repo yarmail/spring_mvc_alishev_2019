@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Все люди</title>
+</head>
+<body>
+
+<p> я страница index.html из папки people, controller people</p>
+
+<div th:each="person : ${people}">
+    <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()}">user</a>
+</div>
+
+</body>
+</html>
+
+<!--
+Подключаем к файлу Thymeleaf
+html lang="en" xmlns:th="http://thymeleaf.org"
+иначе он не понимает person.getName()
+
+Берем из Model ключ people
+В значении ключа у нас находится список
+
+Дальше кусками:
+Это типа for each для с помощью Thymeleaf
+th:each="person : ${people}
+
+Далее мы создаем здесь же переменную id
+(берем у каждого person из списка)
+id=${person.getId()}
+
+Далее подставляем это id в ссылку
+/people/{id}
+чтобы каждая строка с именем пользователя
+вела на его ссылку
+
+Далее из person берем его имя и
+это имя будет в тексте ссылки?
+
+
+
+
+
+
+
+
+-->

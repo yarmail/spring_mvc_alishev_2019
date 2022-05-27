@@ -13,8 +13,8 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 @Configuration
-@ComponentScan ({"lesson16", "lesson20"})
-// было 17, стало 20
+@ComponentScan ({"lesson16", "lesson21"})
+// Изменения 2 папки - 17, 20, 21
 @EnableWebMvc
 public class SpringConfig implements WebMvcConfigurer {
 
