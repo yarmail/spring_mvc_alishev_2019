@@ -43,5 +43,11 @@
 <!--- Урок 21 -->
 <a href="/src/main/java/lesson21">
 Урок 21: CRUD, REST, Паттерн DAO (Data Access Object)</a><br>
-(полезно) <br>
+Полезно. 1. Читаем People, Person <br>
 <img src="/src/main/java/lesson21/crud_post.png" width="200"><br>
+
+<!--- Урок 22 -->
+<a href="/src/main/java/lesson22">
+Урок 22: Аннотация @ModelAttribute. HTML Формы (Thymeleaf).</a><br>
+2 Добавляем создание нового Person <br>
+<img src="/src/main/java/lesson22/modelAttribute.png" width="200"><br>
