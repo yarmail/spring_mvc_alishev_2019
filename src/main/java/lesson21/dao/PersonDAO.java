@@ -33,6 +33,21 @@ public class PersonDAO {
         person.setId(++PEOPLE_COUNT);
         people.add(person);
     }
+
+    /**
+     * К уроку 23
+     */
+    public void update(int id, Person updatePerson) {
+        Person personToBeUpdated = show(id);
+        personToBeUpdated.setName(updatePerson.getName());
+    }
+
+    /**
+     * К уроку 23
+     */
+    public void delete(int id) {
+        people.removeIf(p -> p.getId() == id);
+    }
 }
 
 /*

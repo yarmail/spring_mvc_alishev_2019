@@ -9,6 +9,13 @@
 <p th:text="${person.getName()}">value</p>
 <p th:text="${person.getId()}">value</p>
 
+<a th:href="@{/people/{id}/edit(id=${person.getId()})}">Edit</a>
+
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+    <input type="submit" value="Delete"/>
+
+</form>
+
 </body>
 </html>
 
@@ -19,5 +26,12 @@
 который содержит пользователя с нужным id
 Выводим его параметры
 
+---
 
+Урок 23
+Добавляем кнопку для редактирования человека
+Edit
+
+Добавляем кнопку удаления человека
+value="Delete"
 -->

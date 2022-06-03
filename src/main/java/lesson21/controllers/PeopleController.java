@@ -66,6 +66,45 @@ public class PeopleController {
         personDAO.save(person);
         return "redirect:/people";
     }
+
+    /**
+     * Урок 23 Редактирование person этап 1
+     * Мы получаем из запроса id.
+     * По этому id мы вызываем из базы данные этого пользователя
+     * и заполняем его данными модель person,
+     * которую будем отправлять в форму edit.html
+     * для того, чтобы там не была пустая форма
+     * и с ними переходим на страницу edit
+     * для заполнения
+     */
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id") int id) {
+        model.addAttribute("person", personDAO.show(id));
+        return "people/edit";
+    }
+
+    /**
+     * Урок 23 Обновление данных о Person этап 2
+     * Принимаем объект person из формы
+     * уже с измененными данными
+     * Мы находим по id в БД person
+     * и меняем его
+     *
+     */
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute ("person") Person person, @PathVariable("id") int id) {
+        personDAO.update(id, person);
+        return "redirect:/people";
+    }
+
+    /**
+     * Урок 23 Реализуем удаление человека
+     */
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") int id) {
+        personDAO.delete(id);
+        return "redirect:/people";
+    }
 }
 
     /**
@@ -78,6 +117,7 @@ public class PeopleController {
      * для всего контроллера
      */
 /*  Пока не очень хорошо работает
+
     @ModelAttribute ("headerMessage")
     public String populateHeaderMessage() {
         return "Welcome to our website";

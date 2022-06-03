@@ -51,3 +51,10 @@
 Урок 22: Аннотация @ModelAttribute. HTML Формы (Thymeleaf).</a><br>
 2 Добавляем создание нового Person <br>
 <img src="/src/main/java/lesson22/modelAttribute.png" width="200"><br>
+
+<!--- Урок 23 -->
+<a href="/src/main/java/lesson23">
+Урок 23: CRUD приложение. PATCH, DELETE запросы.</a><br>
+Все запросы кроме GET, POST делаются через POST со скрытым полем<br>
+Описание и примерение фильтров.<br>
+<img src="/src/main/java/lesson23/patch.png" width="200"><br>
