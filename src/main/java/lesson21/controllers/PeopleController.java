@@ -5,8 +5,17 @@ import lesson21.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
+/**
+ * Урок 24 Переделываем отдельные методы под (собака) Valid
+ * Получается что-то подобное
+ * (собака)Valid Person person, BindingResult bindingResult
+ *
+ */
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
@@ -60,9 +69,26 @@ public class PeopleController {
      * их в объект Person
      * После выполнения всех работ мы делаем редирект
      * на страницу /people - показать всех
+     * ---
+     * Урок 24 добавляем анотацию @Valid
+     * после того, добавили валидацию в Person
+     * Сразу после объекта, который должен быть валидирован
+     * ставится объект  BindingResult bindingResult
+     * в который помещаются ошибки, получается так:
+     * (собака)Valid Person person, BindingResult bindingResult
+     * Если в форме ошибки есть, возвращаем обратно форму создания
+     * if (bindingResult.hasErrors()
+     * return "people/new"
+     * При возврате формы у нас уже будут ошибки,
+     * которые мы сможем показать
+     * с помощью Thymeleaf
      */
     @PostMapping()
-    public String create(@ModelAttribute("person") Person person) {
+    public String create(@ModelAttribute("person")
+        @Valid Person person, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "people/new";
+        }
         personDAO.save(person);
         return "redirect:/people";
     }
@@ -89,10 +115,18 @@ public class PeopleController {
      * уже с измененными данными
      * Мы находим по id в БД person
      * и меняем его
+     * ---
+     * Урок 24 добавляем валидацию
+     * далее редактируем представления
      *
      */
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute ("person") Person person, @PathVariable("id") int id) {
+    public String update(@ModelAttribute ("person")
+        @Valid Person person, BindingResult bindingResult,
+        @PathVariable("id") int id) {
+        if (bindingResult.hasErrors()) {
+            return "people/edit";
+        }
         personDAO.update(id, person);
         return "redirect:/people";
     }

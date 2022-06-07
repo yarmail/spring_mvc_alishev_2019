@@ -87,6 +87,15 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>6.1.6.Final</version>
+      <!--
+      Добавлено в 24 уроке
+      для валидации моделей
+      -->
+    </dependency>
   </dependencies>
 
   <build>

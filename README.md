@@ -58,3 +58,9 @@
 Все запросы кроме GET, POST делаются через POST со скрытым полем<br>
 Описание и примерение фильтров.<br>
 <img src="/src/main/java/lesson23/patch.png" width="200"><br>
+
+<!--- Урок 24 -->
+<a href="/src/main/java/lesson24">
+Урок 24: Валидация форм. Аннотация @Valid.</a><br>
+Подключаем Hibernate-validator<br>
+В представлении одна длинная строка получается<br>
