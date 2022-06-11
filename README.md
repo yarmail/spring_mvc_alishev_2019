@@ -64,3 +64,10 @@
 Урок 24: Валидация форм. Аннотация @Valid.</a><br>
 Подключаем Hibernate-validator<br>
 В представлении одна длинная строка получается<br>
+
+<!--- Урок 25 -->
+<a href="/src/main/java/lesson25">
+Урок 25: JDBC API. Базы данных.</a><br>
+<img src="/src/main/java/lesson25/linkdb.png" width="200"><br>
+Описание JDBC, jdbcTemplate, Hibernate, ORM<br>
+**Внимание**: 31:00 довольно подробное описание методов JDBC <br>

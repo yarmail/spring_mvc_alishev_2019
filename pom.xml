@@ -96,6 +96,15 @@
       для валидации моделей
       -->
     </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.2.18</version>
+      <!--
+      Добавлено в 25 уроке
+      для подключения к базе данных
+      -->
+    </dependency>
   </dependencies>
 
   <build>
