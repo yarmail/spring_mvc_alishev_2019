@@ -1,4 +1,4 @@
-### Course Nail Alishev Spring 2019 (part 2)
+### Course Nail Alishev Spring 2020 (part 2)
 
 
 #### Description
@@ -56,7 +56,7 @@
 <a href="/src/main/java/lesson23">
 Урок 23: CRUD приложение. PATCH, DELETE запросы.</a><br>
 Все запросы кроме GET, POST делаются через POST со скрытым полем<br>
-Описание и примерение фильтров.<br>
+Описание и применение фильтров.<br>
 <img src="/src/main/java/lesson23/patch.png" width="200"><br>
 
 <!--- Урок 24 -->
@@ -64,10 +64,16 @@
 Урок 24: Валидация форм. Аннотация @Valid.</a><br>
 Подключаем Hibernate-validator<br>
 В представлении одна длинная строка получается<br>
+<hr>
 
 <!--- Урок 25 -->
 <a href="/src/main/java/lesson25">
 Урок 25: JDBC API. Базы данных.</a><br>
 <img src="/src/main/java/lesson25/linkdb.png" width="200"><br>
 Описание JDBC, jdbcTemplate, Hibernate, ORM<br>
-**Внимание**: 31:00 довольно подробное описание методов JDBC <br>
+<b> Внимание </b>: 31:00 довольно подробное описание методов JDBC <br>
+
+<!--- Урок 26 -->
+<a href="/src/main/java/lesson26">
+Урок 26: SQL инъекции. PreparedStatement. JDBC API</a><br>
+Все критически важные данные должны идти через него.<br>

@@ -8,14 +8,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Урок 26
+ * Оставляем метод index() на Statement
+ * Остальные методы переписываем на PreparedStatement
+ * пока без авто генерации id
+ *
+ * ---
+ *
  * Урок 25.
- * В этом уроке  перходим с хранения
+ * В этом уроке  переходим с хранения
  * private List<Person> people;
  * на хранение в БД
  * Производим подключение к базе данных
  * в статических переменных
  * (помним, что по хорошему они должны храниться
  * в отдельном файле пропертиес)
+ *
  * ---
  *
  * Урок 24.
@@ -73,10 +81,31 @@ public class PersonDAO {
     }
 
     public Person show(int id) {
-        return null;
+        Person person = null;
+        try {
+            PreparedStatement ps = connection.prepareStatement(
+                    "select * from person where id=?"
+            );
+            ps.setInt(1, id);
+            ResultSet rs =  ps.executeQuery();
+            rs.next();
+            person = new Person();
+            person.setId(rs.getInt("id"));
+            person.setName(rs.getString("name"));
+            person.setEmail(rs.getString("email"));
+            person.setAge(rs.getInt("age"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return person;
     }
 
     /**
+     * Урок 26
+     * Нужно переписать этот метод более безопасным
+     * способом, через PrepareStatement
+     * ---
+     *
      * Урок 25
      * Сохранить человека
      * Проверочный запрос:
@@ -84,9 +113,63 @@ public class PersonDAO {
      *
      */
     public void save(Person person) {
-//        person.setId(++PEOPLE_COUNT);
-//        people.add(person);
+        try {
+            PreparedStatement ps = connection.prepareStatement(
+                    "insert  into person values (1, ?, ?, ?)"
+            );
+            ps.setString(1, person.getName());
+            ps.setInt(2, person.getAge());
+            ps.setString(3, person.getEmail());
+            ps.executeUpdate();
+        } catch (SQLException e4) {
+            e4.printStackTrace();
+        }
+    }
 
+    /**
+     * Урок 26
+     * Обновляем все с использованием PreparedStatement
+     */
+    public void update(int id, Person updatedPerson) {
+        try {
+            PreparedStatement ps = connection.prepareStatement(
+                    "update person set name=?, age=?, email=? where id=?"
+            );
+            ps.setString(1, updatedPerson.getName());
+            ps.setInt(2, updatedPerson.getAge());
+            ps.setString(3, updatedPerson.getEmail());
+            ps.setInt(4,id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Урок 26
+     * Обновляем все с использованием PreparedStatement
+     */
+    public void delete(int id) {
+        try {
+            PreparedStatement ps = connection.prepareStatement(
+                    "delete from person where id=?"
+            );
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+/*
+Урок 26
+Старый небезопасный вариант метода show()
+с использованием Statement.
+Практически везде теперь используем
+PreparedStatement
+.
+    public void save(Person person) {
         try {
             Statement statement = connection.createStatement();
             String SQL = "INSERT INTO Person VALUES(" + 1 + ",'" + person.getName() +
@@ -97,23 +180,10 @@ public class PersonDAO {
             e4.printStackTrace();
         }
     }
+.
 
-    /**
-     * К уроку 23
-     * добавили параметры в уроке 24
-     */
-    public void update(int id, Person updatedPerson) {
-    }
+---
 
-    /**
-     * К уроку 23
-     */
-    public void delete(int id) {
-
-    }
-}
-
-/*
  index() - вернуть весь список
  show(int id) - вернуть одного, если есть
 
