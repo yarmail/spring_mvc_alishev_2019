@@ -5,12 +5,17 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
+
+import javax.sql.DataSource;
+import java.sql.DriverManager;
 
 @Configuration
 @ComponentScan ({"lesson16", "lesson21"})
@@ -47,6 +52,32 @@ public class SpringConfig implements WebMvcConfigurer {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
         registry.viewResolver(resolver);
+    }
+
+    /**
+     * Урок 27 создаем бин DataSource, чтобы
+     * использовать JdbcTemplate
+     * Как я понимаю в этом классе мы описывем нашу базу данных
+     * Переносим данные, которые раньше были в PersonDAO
+     */
+    @Bean
+    public DataSource dataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("org.postgresql.Driver");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/first_db");
+        dataSource.setUsername("postgres");
+        dataSource.setPassword("password");
+        return dataSource;
+    }
+
+    /**
+     * Урок 27 создаем бин JdbcTemplate,
+     * который будет использовать
+     * бин DataSource
+     */
+    @Bean
+    public JdbcTemplate jdbcTemplate() {
+        return new JdbcTemplate(dataSource());
     }
 }
 

@@ -1,6 +1,9 @@
 package lesson21.dao;
 
 import lesson21.models.Person;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
@@ -8,189 +11,88 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Урок 26
- * Оставляем метод index() на Statement
- * Остальные методы переписываем на PreparedStatement
- * пока без авто генерации id
- *
+ * Урок 27
+ * Очередной раз переписываем DAO на JdbcTemplate
+ * После создания в SpringConfig двух бинов
+ * dataSource() и jdbcTemplate()
+ * все настройки уходят туда
  * ---
+ * для работы с jdbcTemplate
+ * в качестве 2 аргумента мы должны указать RowMapper
+ * Это такой объект, который отображает строки из таблицы
+ * каждую строку, полученую в результате этого запроса
+ * из нашей таблицы Person он отобразит в объект класса
+ * Person. Row mapper мы реализуем самостоятельно
+ * в классе PersonMapper
+ * Если названия колонок совпадают с названиями полей,
+ * то вместо RowMapper мы можем использовать
+ * встроенный маппер BeanPropertyRowMapper
  *
- * Урок 25.
- * В этом уроке  переходим с хранения
- * private List<Person> people;
- * на хранение в БД
- * Производим подключение к базе данных
- * в статических переменных
- * (помним, что по хорошему они должны храниться
- * в отдельном файле пропертиес)
- *
- * ---
- *
- * Урок 24.
- * В связи с изменением основной модели Person
- * (добавления в неё полей) приходится поменятть и здесь
- *
+ * Проверочный запрос: localhost:8080/people
  */
 @Component
 public class PersonDAO {
-    private static int PEOPLE_COUNT;
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/first_db";
-    private static final String USERNAME = "postgres";
-    private static final String PASSWORD = "password";
-    private static Connection connection;
+    private final JdbcTemplate jdbcTemplate;
 
-    static {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e1) {
-            e1.printStackTrace();
-        }
-
-        try {
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-        } catch (SQLException e2) {
-            e2.printStackTrace();
-        }
+    @Autowired
+    public PersonDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     /**
-     * Урок 25
-     * Показать всех людей
-     * Запрос: localhost:8080/people
-     * (сработало)
+     * Показать всех
      */
     public List<Person> index() {
-        List<Person> people = new ArrayList<>();
-        try {
-            Statement statement = connection.createStatement();
-            String SQL = "select * from person";
-            ResultSet resultSet = statement.executeQuery(SQL);
-            while(resultSet.next()) {
-                Person person = new Person();
-                person.setId(resultSet.getInt("id"));
-                person.setName(resultSet.getString("name"));
-                person.setEmail(resultSet.getString("email"));
-                person.setAge(resultSet.getInt("age"));
-                people.add(person);
-            }
-        } catch (SQLException e3) {
-            e3.printStackTrace();
-        }
-        return people;
-    }
-
-    public Person show(int id) {
-        Person person = null;
-        try {
-            PreparedStatement ps = connection.prepareStatement(
-                    "select * from person where id=?"
-            );
-            ps.setInt(1, id);
-            ResultSet rs =  ps.executeQuery();
-            rs.next();
-            person = new Person();
-            person.setId(rs.getInt("id"));
-            person.setName(rs.getString("name"));
-            person.setEmail(rs.getString("email"));
-            person.setAge(rs.getInt("age"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return person;
+        return jdbcTemplate.query("select * from person",
+                new BeanPropertyRowMapper<>(Person.class));
     }
 
     /**
-     * Урок 26
-     * Нужно переписать этот метод более безопасным
-     * способом, через PrepareStatement
-     * ---
-     *
-     * Урок 25
-     * Сохранить человека
-     * Проверочный запрос:
-     * Запрос: localhost:8080/people/new
-     *
+     * Показать одного, если есть
+     */
+    public Person show(int id) {
+        return jdbcTemplate.query("select * from person where id=?",
+                new Object[]{id}, new BeanPropertyRowMapper<>(Person.class))
+                .stream().findAny().orElse(null);
+    }
+
+    /**
+     * Сохранить нового
      */
     public void save(Person person) {
-        try {
-            PreparedStatement ps = connection.prepareStatement(
-                    "insert  into person values (1, ?, ?, ?)"
-            );
-            ps.setString(1, person.getName());
-            ps.setInt(2, person.getAge());
-            ps.setString(3, person.getEmail());
-            ps.executeUpdate();
-        } catch (SQLException e4) {
-            e4.printStackTrace();
-        }
+        jdbcTemplate.update("insert into person values (1, ?, ?, ?)",
+                person.getName(), person.getAge(), person.getEmail());
     }
 
     /**
-     * Урок 26
-     * Обновляем все с использованием PreparedStatement
+     * Обновить по id
      */
     public void update(int id, Person updatedPerson) {
-        try {
-            PreparedStatement ps = connection.prepareStatement(
-                    "update person set name=?, age=?, email=? where id=?"
-            );
-            ps.setString(1, updatedPerson.getName());
-            ps.setInt(2, updatedPerson.getAge());
-            ps.setString(3, updatedPerson.getEmail());
-            ps.setInt(4,id);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        jdbcTemplate.update("update person set name=?, age=?, email=? where id=?",
+                updatedPerson.getName(), updatedPerson.getAge(), updatedPerson.getEmail(), id);
     }
 
-    /**
-     * Урок 26
-     * Обновляем все с использованием PreparedStatement
-     */
     public void delete(int id) {
-        try {
-            PreparedStatement ps = connection.prepareStatement(
-                    "delete from person where id=?"
-            );
-            ps.setInt(1, id);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        jdbcTemplate.update("delete from person where id=?", id);
     }
 }
 
 /*
-Урок 26
-Старый небезопасный вариант метода show()
-с использованием Statement.
-Практически везде теперь используем
-PreparedStatement
-.
-    public void save(Person person) {
-        try {
-            Statement statement = connection.createStatement();
-            String SQL = "INSERT INTO Person VALUES(" + 1 + ",'" + person.getName() +
-                    "'," + person.getAge() + ",'" + person.getEmail() + "')";
 
-            statement.executeUpdate(SQL);
-        } catch (SQLException e4) {
-            e4.printStackTrace();
-        }
+Урок 27
+Примеры с использованием RowMapper, который мы делаем сами
+в классе PersonMapper.
+.
+    public List<Person> index() {
+        return jdbcTemplate.query("select * from person", new PersonMapper());
+    }
+.
+    public Person show(int id) {
+        return jdbcTemplate.query("select * from person where id=?", new Object[]{id}, new PersonMapper())
+                .stream().findAny().orElse(null);
     }
 .
 
----
 
- index() - вернуть весь список
- show(int id) - вернуть одного, если есть
-
- Помечаем класс как @Component, стобы иметь возможность
- воспользоваться Spring и внедрить его где нам надо,
- в данном случае подключить к контроллеру
-
- (проверить, что папка сканируется можно в конфиге 16 урока)
-
- */
+*/

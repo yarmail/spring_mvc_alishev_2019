@@ -77,3 +77,8 @@
 <a href="/src/main/java/lesson26">
 Урок 26: SQL инъекции. PreparedStatement. JDBC API</a><br>
 Все критически важные данные должны идти через него.<br>
+
+<!--- Урок 27 -->
+<a href="/src/main/java/lesson27">
+Урок 27: JdbcTemplate.</a><br>
+Добавляем в конфиг DataSource<br>
