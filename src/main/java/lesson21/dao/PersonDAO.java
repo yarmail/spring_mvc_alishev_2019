@@ -2,11 +2,13 @@ package lesson21.dao;
 
 import lesson21.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,9 +78,70 @@ public class PersonDAO {
     public void delete(int id) {
         jdbcTemplate.update("delete from person where id=?", id);
     }
+
+    ///////////////////////////////////
+    //////// Урок 30
+    //////// Тестируем производительность пактной вставки
+    //////////////////////////////////
+
+    /**
+     * Вставляет по одному
+     * Замеряем время до и после вставки
+     * Используем похожее на метод save
+     */
+    public void testMultipleUpdate() {
+        List<Person> people = create1000People();
+        long before = System.currentTimeMillis();
+        for(Person person : people) {
+            jdbcTemplate.update("insert into person values(?, ?, ?, ?)",
+            person.getId(), person.getName(), person.getAge(), person.getEmail());
+        }
+        long after = System.currentTimeMillis();
+        System.out.println("Time: " + (after - before));
+    }
+
+    /**
+     * Вставка 1000 записей одним пакетом
+     * Для пакетной вставки есть отдельный метод batchUpdate
+     */
+    public void testBatchUpdate() {
+        List<Person> people = create1000People();
+        long before = System.currentTimeMillis();
+        jdbcTemplate.batchUpdate("insert into person values(?,?,?,?)",
+                new BatchPreparedStatementSetter() {
+                    @Override
+                    public void setValues(PreparedStatement preparedStatement, int i) throws SQLException {
+                        preparedStatement.setInt(1, people.get(i).getId());
+                        preparedStatement.setString(2, people.get(i).getName());
+                        preparedStatement.setInt(3, people.get(i).getAge());
+                        preparedStatement.setString(4,people.get(i).getEmail());
+                    }
+
+                    @Override
+                    public int getBatchSize() {
+                        return people.size();
+                    }
+                });
+        long after = System.currentTimeMillis();
+        System.out.println("Time: " + (after - before));
+    }
+
+    private List<Person> create1000People() {
+        List<Person> people = new ArrayList<>();
+        for (int i = 0; i < 1000; i++) {
+            people.add(new Person(i, "Name " + i, 30, "test"+ i + "mail.ru"));
+        }
+        return people;
+    }
 }
 
 /*
+Урок 30
+Реализуем методы пакетной обработки запросов к БД
+testMultipleUpdate() - вставляет по одному
+testBatchUpdate() - отправляет 1 запрос с 1000 запросов в БД
+
+---
 
 Урок 27
 Примеры с использованием RowMapper, который мы делаем сами
@@ -93,6 +156,4 @@ public class PersonDAO {
                 .stream().findAny().orElse(null);
     }
 .
-
-
 */
