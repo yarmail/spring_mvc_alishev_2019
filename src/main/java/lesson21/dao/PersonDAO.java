@@ -61,9 +61,13 @@ public class PersonDAO {
 
     /**
      * Сохранить нового
+     * Урок 31.
+     * Переписываем этот метод с учетом того,
+     * что автоинкременент мы передали БД
+     *
      */
     public void save(Person person) {
-        jdbcTemplate.update("insert into person values (1, ?, ?, ?)",
+        jdbcTemplate.update("insert into person(name, age, email) values (?, ?, ?)",
                 person.getName(), person.getAge(), person.getEmail());
     }
 
@@ -136,6 +140,12 @@ public class PersonDAO {
 }
 
 /*
+Урок 31
+Переписываем метод save() с учетом того, что автоинкеменент
+мы передали БД
+
+---
+
 Урок 30
 Реализуем методы пакетной обработки запросов к БД
 testMultipleUpdate() - вставляет по одному
