@@ -106,3 +106,8 @@
 <!--- Урок 32 -->
 <a href="/src/main/java/lesson32">
 Урок 32 Ограничения (Constraints) - NOT NULL, UNIQUE, PRIMARY KEY, CHECK</a><br>
+
+<!--- Урок 33 -->
+<a href="/src/main/java/lesson33">
+Урок 33 Отношения (связи) в БД. Внешний ключ (Foreign key)</a><br>
+<img src="/src/main/java/lesson33/foreign_key.png" width="200"><br>
