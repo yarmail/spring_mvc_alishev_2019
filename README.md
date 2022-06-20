@@ -121,3 +121,8 @@
 <a href="/src/main/java/lesson35">
 Урок 35 Отношение Один к Одному (One to One)</a><br>
 <img src="/src/main/java/lesson35/onetoone.png" width="200"><br>
+
+<!--- Урок 36 -->
+<a href="/src/main/java/lesson36">
+Урок 36 Отношение Многие ко Многим (Many to Many)</a><br>
+<img src="/src/main/java/lesson36/manytomany.png" width="200"><br>
