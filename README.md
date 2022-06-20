@@ -111,3 +111,13 @@
 <a href="/src/main/java/lesson33">
 Урок 33 Отношения (связи) в БД. Внешний ключ (Foreign key)</a><br>
 <img src="/src/main/java/lesson33/foreign_key.png" width="200"><br>
+
+<!--- Урок 34 -->
+<a href="/src/main/java/lesson34">
+Урок 34 Отношение Один ко Многим (One to Many)</a><br>
+<img src="/src/main/java/lesson34/onetomany.png" width="200"><br>
+
+<!--- Урок 35 -->
+<a href="/src/main/java/lesson35">
+Урок 35 Отношение Один к Одному (One to One)</a><br>
+<img src="/src/main/java/lesson35/onetoone.png" width="200"><br>
