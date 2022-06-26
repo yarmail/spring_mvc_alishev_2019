@@ -126,3 +126,12 @@
 <a href="/src/main/java/lesson36">
 Урок 36 Отношение Многие ко Многим (Many to Many)</a><br>
 <img src="/src/main/java/lesson36/manytomany.png" width="200"><br>
+
+<!--- Урок 37 -->
+<a href="/src/main/java/lesson37">
+Урок 37 Объединение таблиц (Database Joins) - INNER JOIN, OUTER JOIN, CROSS JOIN</a><br>
+<img src="/src/main/java/lesson37/join.png" width="200"><br>
+
+<!--- Урок 38 -->
+<a href="/src/main/java/lesson38">
+Урок 38 Практика (SQL и Join'ы)</a><br>
