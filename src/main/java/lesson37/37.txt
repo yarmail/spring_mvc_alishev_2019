@@ -1,0 +1,112 @@
+Урок 37 Объединение таблиц (Database Joins) - INNER JOIN, OUTER JOIN, CROSS JOIN
+
+Наши нормализованные таблицы эффективно хранят
+данные, но нам тяжело воспринимать данные, приходится
+сопоставлять ключи
+
+Мы можем временно соединить таблицы (не создавая новых таблиц)
+чтобы удобно посмотреть все данные и взаимоотношения.
+Из двух и более нормализованных таблиц мы создаем одну
+денормализованную
+
+---
+
+Виды JOIN'ов
+
+- Inner Join - это важно
+
+Outer Join
+Left outer Join (Left Join) - это важно
+Right outer Join (Right Join)
+
+Cross Join
+
+---
+
+INNER JOIN (пример)
+
+Person
+User_id name   age
+1       Tom    35
+2       Bob    52
+3       Katy   14
+4       Nick   30
+
+Order
+order_ id  user_id   item_name
+1          1         Book
+2          2         Airpods
+3          1         Iphone
+4          3         Kindle
+
+Создаем inner join (обычный join)
+select * from Person join Order on Person.user.id = Order.user_id;
+Person join Order - объединяем эти таблицы
+join - можно также написать inner join, но inner можно опустить
+on Person.user.id = Order.user_id - мы хотим делать объединение на равенстве
+ключей из этих колонок. В результате получается примерно так:
+
+Person.user_id  name  age order_ id  Order.user_id   item_name
+1               Tom    35    1          1             Book
+1               Tom    35    3          1             Iphone
+2               Bob    52    2          2             Airpods
+3               Katy   14    4          3             Kindle
+
+Вот эта строка не нашла пару
+4       Nick   30
+
+Также можно посмотреть на диаграмме inner_join_diag.png
+в join попадает только пересечение множеств.
+
+---
+
+Outer Join (left) на примере
+(left join)
+
+Берем предыдущие таблицы и пишем новый запрос:
+select * from Person left join Order on Person.user_id = Order.user_id;
+
+Результат почти такой же:
+Person.user_id  name  age order_ id  Order.user_id   item_name
+1               Tom    35    1          1             Book
+1               Tom    35    3          1             Iphone
+2               Bob    52    2          2             Airpods
+3               Katy   14    4          3             Kindle
+4               Nick   30    null       null          null
+
+Более широкий охват
+Все строки из левой таблицы обязательно попадут в таблицу: left_join_diag.png
+
+---
+
+Outer Join (Right) = Right Join
+
+Right Join легко выражается через Left Join, поэтому обычно никогда не используется
+
+Person R Order = Order L Person
+
+---
+
+Cross Join
+
+Возвращает Декартово (или прямое) произведение всех таблиц
+Простыми словами - каждая строка из таблицы A ставится в пару с кажой строкой из таблицы Б
+(сочетание?)
+было 1 таблица 3 строки, 2 таблица 2 строки,
+стало 1 таблица - 6 строк - cross_join.png
+
+Запрос:
+select * from Person cross join Order;
+
+---
+
+Когда использовать Inner Join, а когда Left Join?
+1. Выведи всех пользователей, которые указал свой адрес -
+Inner Join - выведутся только те пользователи,
+у которых найдется пара из таблицы Адрес
+
+2. Выведи всю информацию обо всех пользователях
+left join - выведутся все пользователи, даже
+те, у которых нету адреса - там будет null
+
+Практика на следующем занятии
