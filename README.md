@@ -135,3 +135,8 @@
 <!--- Урок 38 -->
 <a href="/src/main/java/lesson38">
 Урок 38 Практика (SQL и Join'ы)</a><br>
+
+<!--- Урок 39 -->
+<a href="/src/main/java/lesson39">
+Урок 39 Индексы в БД</a><br>
+<img src="/src/main/java/lesson39/index.png" width="200"><br>
