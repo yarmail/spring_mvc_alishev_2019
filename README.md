@@ -140,3 +140,10 @@
 <a href="/src/main/java/lesson39">
 Урок 39 Индексы в БД</a><br>
 <img src="/src/main/java/lesson39/index.png" width="200"><br>
+
+<!--- Урок 40 -->
+<a href="/src/main/java/lesson40">
+Урок 40 Каскадирование в БД</a><br>
+<img src="/src/main/java/lesson39/index.png" width="200"><br>
+(какскадное удаление в таблицах)<br>
+<hr>
