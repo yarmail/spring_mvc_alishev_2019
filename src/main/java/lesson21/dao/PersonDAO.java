@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Урок 27
@@ -57,6 +58,23 @@ public class PersonDAO {
         return jdbcTemplate.query("select * from person where id=?",
                 new Object[]{id}, new BeanPropertyRowMapper<>(Person.class))
                 .stream().findAny().orElse(null);
+    }
+
+    /**
+     * Урок 41
+     * Подключаем новый метод show для того, чтобы
+     * проверить, есть ли в БД одинаковый email
+     * Это нужно для продвинутой валидации
+     * в классе PersonValidator
+     * Старый вариант
+     * .stream().findAny().orElse(null);
+     * меняем на работу c Option
+     */
+    public Optional<Person> show(String email) {
+        return jdbcTemplate.query("SELECT * FROM Person Where email=?",
+                new Object[] {email}, new BeanPropertyRowMapper<>(Person.class))
+                .stream().findAny();
+
     }
 
     /**

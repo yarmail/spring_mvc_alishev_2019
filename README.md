@@ -147,3 +147,9 @@
 <img src="/src/main/java/lesson39/index.png" width="200"><br>
 (какскадное удаление в таблицах)<br>
 <hr>
+
+<!--- Урок 41 -->
+<a href="/src/main/java/lesson41">
+Урок 41 Spring Validator</a><br>
+Продвинутая валидация в случаях,
+когда отказ идет от базы данных.<br>
