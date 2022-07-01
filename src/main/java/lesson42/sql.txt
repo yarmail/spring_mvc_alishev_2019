@@ -1,0 +1,9 @@
+-- Урок 42
+-- Посмотрим что есть в таблице
+select * from person;
+
+-- очистим таблицу
+truncate table person;
+
+-- добавляем новую колонку с адресом
+alter table  person add column address varchar not null;

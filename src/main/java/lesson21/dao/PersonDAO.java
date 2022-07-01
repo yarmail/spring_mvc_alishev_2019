@@ -32,6 +32,11 @@ import java.util.Optional;
  * встроенный маппер BeanPropertyRowMapper
  *
  * Проверочный запрос: localhost:8080/people
+ * --
+ * Урок 42 добавлено новое поле адрес.
+ * Меняем save, update
+ * далее меняем представление new
+ *
  */
 @Component
 public class PersonDAO {
@@ -85,16 +90,16 @@ public class PersonDAO {
      *
      */
     public void save(Person person) {
-        jdbcTemplate.update("insert into person(name, age, email) values (?, ?, ?)",
-                person.getName(), person.getAge(), person.getEmail());
+        jdbcTemplate.update("insert into person(name, age, email, address) values (?, ?, ?, ?)",
+                person.getName(), person.getAge(), person.getEmail(), person.getAddress());
     }
 
     /**
      * Обновить по id
      */
     public void update(int id, Person updatedPerson) {
-        jdbcTemplate.update("update person set name=?, age=?, email=? where id=?",
-                updatedPerson.getName(), updatedPerson.getAge(), updatedPerson.getEmail(), id);
+        jdbcTemplate.update("update person set name=?, age=?, email=?, address=? where id=?",
+                updatedPerson.getName(), updatedPerson.getAge(), updatedPerson.getEmail(), updatedPerson.getAddress(), id);
     }
 
     public void delete(int id) {
@@ -148,10 +153,15 @@ public class PersonDAO {
         System.out.println("Time: " + (after - before));
     }
 
+    /**
+     * Урок 42
+     * С добавлением нового поля адрес, обновляем метод
+     */
     private List<Person> create1000People() {
         List<Person> people = new ArrayList<>();
         for (int i = 0; i < 1000; i++) {
-            people.add(new Person(i, "Name " + i, 30, "test"+ i + "mail.ru"));
+            people.add(new Person(i, "Name " + i, 30,
+                    "test"+ i + "mail.ru", "some address"));
         }
         return people;
     }

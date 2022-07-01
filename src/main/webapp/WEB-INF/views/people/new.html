@@ -21,6 +21,10 @@
     <input type="text" th:field="*{email}" id="email"/>
     <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
     <br/>
+    <label for="email">Enter address: </label>
+    <input type="text" th:field="*{address}" id="address"/>
+    <div style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address Error</div>
+    <br/>
     <input type="submit" value="Create!"/>
 </form>
 
@@ -28,6 +32,11 @@
 </html>
 
 <!--
+
+Урок 42 добавляем параметр адрес
+
+---
+
 Куда будет отправляться форма.
 th:action="@{/people}"
 
@@ -46,6 +55,4 @@ Thymeleaf вставляет сообщение об ошибке, которо�
 есть в модели Person
 <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">заменяемый текст</div>
 Далее эту строку можно оптимизировать для всех остальных полей
-
-
 -->

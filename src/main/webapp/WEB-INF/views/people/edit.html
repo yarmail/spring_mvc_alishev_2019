@@ -18,6 +18,10 @@
     <input type="text" th:field="*{email}" id="email"/>
     <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
     <br/>
+    <label for="email">Enter address: </label>
+    <input type="text" th:field="*{address}" id="address"/>
+    <div style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address Error</div>
+    <br/>
     <input type="submit" value="Update!"/>
 </form>
 
@@ -25,6 +29,10 @@
 </html>
 
 <!--
+Урок 42 добавляем параметр адрес
+
+---
+
 Урок 23 Форма для редактирования человека этап 1
 
 Эта форма похожа на создание нового человека,
@@ -34,7 +42,6 @@ Thymeleaf метод - его нет в HTML 5
 Мы его сможем прочитать на стороне Spring
 с помощью фильтра
 th:method="PATCH"
-
 ---
 
 (?)
