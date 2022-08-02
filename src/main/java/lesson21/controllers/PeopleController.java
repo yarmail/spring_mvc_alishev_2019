@@ -52,7 +52,7 @@ public class PeopleController {
      * заполнения формы Person
      * <p>
      * можно заменить model.addAttribute на конструкцию
-     * из метода сreate и будет работать также
+     * из метода create и будет работать также
      */
     @GetMapping("/new")
     public String newPerson(Model model) {
